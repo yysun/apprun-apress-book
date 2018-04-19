@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AppRun - Digital Clock</title>
+</head>
+<body>
+  <div id="my-app"></div>
+  <script src="https://unpkg.com/apprun@latest/dist/apprun-html.js"></script>
+  <script>
+    const state = new Date();
+    const view = state => {
+      return `<h1>${state.toLocaleTimeString()}</h1>`;
+    };
+    const update = {
+      'timer': state => new Date()
+    };
+    window.setInterval(() => { app.run('timer') }, 1000);
+    app.start('my-app', state, view, update);
+  </script>
+</body>
+</html>

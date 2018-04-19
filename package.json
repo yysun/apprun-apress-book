@@ -1,0 +1,44 @@
+{
+  "name": "apprun-apress-book",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development",
+    "hello-world": "npm run start -- app=\"./Chapter_02/main.tsx\"",
+    "counter": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
+    "counter-history": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
+    "counters": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
+    "to-do": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
+    "to-do-local": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
+    "to-do-clod": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
+    "to-do-mvc": "npm run start -- app=\"./Chapter_04/to-do/main.tsx\" --content-base=\"./Chapter_04/to-do\"",
+    "data-tables": "npm run start -- app=\"./Chapter_04/data-tables/main.tsx\" --content-base=\"./Chapter_04/data-tables\"",
+    "calendar": "npm run start -- app=\"./Chapter_04/calendar/main.tsx\" --content-base=\"./Chapter_04/calendar\"",
+    "chart": "npm run start -- app=\"./Chapter_04/chart/main.tsx\" --content-base=\"./Chapter_04/chart\"",
+    "d3": "npm run start -- app=\"./Chapter_04/d3/main.tsx\" --content-base=\"./Chapter_04/d3\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yysun/apprun-apress-book.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yysun/apprun-apress-book/issues"
+  },
+  "homepage": "https://github.com/yysun/apprun-apress-book#readme",
+  "devDependencies": {
+    "source-map-loader": "^0.2.3",
+    "ts-loader": "^4.1.0",
+    "typescript": "^2.7.2",
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1"
+  },
+  "dependencies": {
+    "apprun": "^1.12.0",
+    "firebase": "^4.12.0"
+  }
+}

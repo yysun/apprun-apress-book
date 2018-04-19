@@ -1,0 +1,52 @@
+import app from 'apprun';
+import Firebase = require('firebase');
+
+app.on('//', _ => { });
+
+Firebase.initializeApp({ databaseURL: 'https://hacker-news.firebaseio.com' });
+const db = Firebase.database().ref('/v0');
+
+const fetch = async (path): Promise<any> => {
+  const ref = db.child(path);
+  return new Promise((resolve, reject) => {
+    ref.once('value', snapshot => resolve(snapshot.val()), reject);
+  })
+}
+
+app.on('get-list', (type, list) => {
+  if (list.items.length) {
+    app.run('get-list-items', list);
+    return
+  }
+  const path = `${type}stories`;
+  const ref = db.child(path);
+  console.log(`fetch: ${type}`);
+
+  ref.on('value', async snapshot => {
+    list.items = snapshot.val();
+    app.run('get-list-items', type, list);
+  })
+});
+
+// app.on('get-list-items', async ({ items, min, max }) => {
+//   await Promise.all(items.map(async (id, idx) => {
+//     if (idx >= min && idx < max && (typeof id === 'number')) {
+//       items[idx] = await fetch(`item/${id}`)
+//     }
+//   }));
+//   app.run('render');
+// })
+
+app.on('get-list-items', (type, { items, min, max }) => {
+  items.map((id, idx) => {
+    if (idx >= min && idx < max && (typeof id === 'number')) {
+      const ref = db.child(`item/${id}`);
+      ref.once('value', snapshot => app.run('list-item', type, idx, snapshot.val()));
+    }
+  });
+});
+
+app.on('get-item', id => {
+
+
+});

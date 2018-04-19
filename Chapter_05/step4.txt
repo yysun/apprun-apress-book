@@ -1,0 +1,60 @@
+import app from 'apprun';
+import './firebase';
+
+const state = {
+  type: 'top',
+  id: ''
+};
+
+
+const Item = ({ item }) => <div>
+</div>
+
+const List = ({ list }) => <div>
+</div>
+
+const view = state => {
+  const style = (type) => ({ 'font-weight': type === state.type ? 'bold' : 'normal' });
+  return <div className={`hn ${state.type}`}>
+    <div className='header'>
+      <div className='inner'>
+        <div style={{ 'float': 'left' }}>
+          <span style={{ 'margin-right': '20px' }}>
+            <a href='https://github.com/yysun/apprun'>AppRun</a> &#10084;&nbsp;
+            <a href='https://news.ycombinator.com'>HN</a>
+          </span>
+          <a style={style('top')} href={`#/top`}>Top</a> |&nbsp;
+          <a style={style('new')} href={`#/new`}>New</a> |&nbsp;
+          <a style={style('best')} href={`#/best`}>Best</a> |&nbsp;
+          <a style={style('show')} href={`#/show`}>Show</a> |&nbsp;
+          <a style={style('ask')} href={`#/ask`}>Ask</a> |&nbsp;
+          <a style={style('job')} href={`#/job`}>Jobs</a>
+        </div>
+      </div>
+    </div>
+    <div className='main'>
+      <div className='inner'>
+        {state.type === 'item' ?
+          <Item item={state[state.id]} /> :
+          <List list={state[state.type]} />}
+      </div>
+    </div>
+    <div className='footer'>
+      <div className='inner'>
+        Powered by <a href='https://github.com/yysun/apprun'>AppRun</a>,
+        Source code: <a href='https://github.com/yysun/apprun-hn'>Github</a>
+      </div>
+    </div>
+  </div>
+}
+
+const update = {
+  '#': (state, type, id) => {
+    type === 'item' ? app.run('get-item', id) : app.run('get-list', type);
+    return { ...state, type, id };
+  }
+}
+
+app.start('my-app', {}, view, update);
+
+

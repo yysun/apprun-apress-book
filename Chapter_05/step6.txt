@@ -1,0 +1,115 @@
+import app from 'apprun';
+import './firebase';
+
+const page_size = 10;
+
+const state = {
+  type: 'top',
+  id: ''
+};
+
+
+const Item = ({ item }) => <div>
+</div>
+
+
+const ListItem = ({ item, idx }) => {
+  if (!item) return;
+  const item_link = `#/item/${item.id}`;
+  return <li>
+    <div className={'score'}>{item.score}</div>
+    <div><a href={item.url || item_link}>{item.title}</a></div>
+    <div className='meta'>
+      <span>by {item.by}</span> |&nbsp;
+        <span>{timeAgo(item.time)} ago</span> |&nbsp;
+        <span><a href={`${item_link}`} >{pluralize(item.descendants, ' comment')}</a></span>
+    </div>
+  </li>
+}
+
+const List = ({ list }) => {
+  if (!list || !list.items) return;
+  return <div>
+    <ul className='story-list'> {
+      list.items.filter((item, i) => i >= list.min && i < list.max && (typeof item !== 'number'))
+        .map(item => <ListItem item={item} idx={list.items.indexOf(item) + 1} />)
+    }
+    </ul>
+    <div className='more'>
+      <span>{list.min + 1} - {list.max} ({list.items.length}) &nbsp;</span>
+      {list.items && list.max < list.items.length && <a onclick={() => app.run('more')}> |&nbsp; More ...</a>}
+    </div>
+  </div>;
+}
+
+const view = state => {
+  console.log(state)
+  if (state instanceof Promise) return;
+  const style = (type) => ({ 'font-weight': type === state.type ? 'bold' : 'normal' });
+  return <div className={`hn ${state.type}`}>
+    <div className='header'>
+      <div className='inner'>
+        <div style={{ 'float': 'left' }}>
+          <span style={{ 'margin-right': '20px' }}>
+            <a href='https://github.com/yysun/apprun'>AppRun</a> &#10084;&nbsp;
+            <a href='https://news.ycombinator.com'>HN</a>
+          </span>
+          <a style={style('top')} href={`#/top`}>Top</a> |&nbsp;
+          <a style={style('new')} href={`#/new`}>New</a> |&nbsp;
+          <a style={style('best')} href={`#/best`}>Best</a> |&nbsp;
+          <a style={style('show')} href={`#/show`}>Show</a> |&nbsp;
+          <a style={style('ask')} href={`#/ask`}>Ask</a> |&nbsp;
+          <a style={style('job')} href={`#/job`}>Jobs</a>
+        </div>
+      </div>
+    </div>
+    <div className='main'>
+      <div className='inner'>
+        {state.type === 'item' ?
+          <Item item={state[state.id]} /> :
+          <List list={state[state.type]} />}
+      </div>
+    </div>
+    <div className='footer'>
+      <div className='inner'>
+        Powered by <a href='https://github.com/yysun/apprun'>AppRun</a>,
+        Source code: <a href='https://github.com/yysun/apprun-hn'>Github</a>
+      </div>
+    </div>
+  </div>
+}
+
+const update = {
+  '#': (state, type, id) => {
+    type = type || state.type || 'top';
+    state.type = type;
+    state[type] = state[type] || { min: 0, max: page_size, items: [] }
+    type === 'item' ?
+      app.run('get-item', id, state) :
+      app.run('get-list', type, state[type]);
+  },
+  'render': state => state,
+  'more': state => {
+    const list = state[state.type];
+    list.max = Math.min(list.max + page_size, list.items.length)
+    app.run('get-list', state.type, list);
+  },
+}
+
+app.start('my-app', state, view, update);
+
+function pluralize(number, label) {
+  if (!number) number = 0;
+  return (number === 1) ? number + label : number + label + 's'
+}
+
+function timeAgo(time) {
+  const between = Date.now() / 1000 - Number(time)
+  if (between < 3600) {
+    return pluralize(~~(between / 60), ' minute')
+  } else if (between < 86400) {
+    return pluralize(~~(between / 3600), ' hour')
+  } else {
+    return pluralize(~~(between / 86400), ' day')
+  }
+}

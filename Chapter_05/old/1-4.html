@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AppRun - Echo</title>
+</head>
+<body>
+  <div id="my-app"></div>
+  <script src="https://unpkg.com/apprun@latest/dist/apprun-html.js"></script>
+  <script>
+    const state = '';
+    const view = (state) => `<h1>Hello ${state}</h1>
+      <input oninput='app.run("input", this)'>`;
+    const update = {
+      'input': (state, el) => el.value
+    }
+    app.start('my-app', state, view, update);
+  </script>
+</body>
+
+</html>
