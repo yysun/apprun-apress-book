@@ -10,8 +10,8 @@ After cloned the project, please run
 
 Double click the .html files to run the examples.
 
-chapter 1/1-3.html - the counter application
-chapter 1/1-4.html - the counter application with state history
+* chapter 1/1-3.html - the counter application
+* chapter 1/1-4.html - the counter application with state history
 
 ## Chapter 2
 
@@ -19,8 +19,6 @@ chapter 1/1-4.html - the counter application with state history
 
 ## Chapter 3
 
-* npm run counter
-* npm run counter-history
 * npm run counters
 * npm run to-do
 * npm run to-do-local
