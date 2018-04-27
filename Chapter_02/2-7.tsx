@@ -1,8 +1,8 @@
 import app from 'apprun';
 
-const state = 'Hello World - AppRun'
+const state = {}
 
-const view = state => {
+const view = (state) => {
   return <div>
     {state}
   </div>

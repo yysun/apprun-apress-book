@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/yysun/apprun-apress-book#readme",
   "devDependencies": {
+    "source-map-loader": "^0.2.3",
     "ts-loader": "^4.1.0",
     "typescript": "^2.7.2",
     "webpack": "^4.2.0",
