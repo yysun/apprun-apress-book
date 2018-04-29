@@ -8,6 +8,8 @@
     "hello-world": "npm run start -- app=\"./Chapter_02/main.tsx\"",
     "counter": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
     "counter-history": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
+    "jsx-counter": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
+    "jsx-counter-history": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
     "counters": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
     "to-do": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
     "to-do-local": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",

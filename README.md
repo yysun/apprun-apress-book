@@ -19,6 +19,8 @@ Double click the .html files to run the examples.
 
 ## Chapter 3
 
+* npm run counter
+* npm run counter-history
 * npm run counters
 * npm run to-do
 * npm run to-do-local

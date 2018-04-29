@@ -7,8 +7,8 @@ type TodoItem = {
 }
 
 type State = {
-  filter: 'All' | 'Active' | 'Complete',
-  list: Array<TodoItem>
+  filter: 'All' | 'Active' | 'Complete';
+  list: Array<TodoItem>;
 };
 
 const state: State = {
@@ -17,9 +17,9 @@ const state: State = {
 };
 
 const view = (state: State) => {
-  const n1 = state.list.length;
-  const n2 = state.list.filter(todo => !todo.done).length || 0;
-  const n3 = state.list.filter(todo => todo.done).length || 0;
+  const countAll = state.list.length;
+  const countActive = state.list.filter(todo => !todo.done).length || 0;
+  const countComplete = state.list.filter(todo => todo.done).length || 0;
   console.log(state)
   return <div>
     <button onclick={() => app.run("history-prev")}> &lt;&lt; </button>
@@ -28,21 +28,22 @@ const view = (state: State) => {
     <ul>
       {
         state.list
+          .map((todo, idx) => ({ ...todo, idx }))
           .filter(todo => state.filter === 'All' ||
             (state.filter === 'Active' && !todo.done) ||
             (state.filter === 'Complete' && todo.done))
-          .map((todo, idx) => <li>
-            <input type='checkbox' onclick={() => app.run('toggle-item', idx)} checked={todo.done}/>
+          .map((todo) => <li>
+            <input type='checkbox' onclick={() => app.run('toggle-item', todo.idx)} />
             <span>{todo.title} {' '}
-              (<a href='#' onclick={() => app.run('delete-item', idx)}>&#9249;</a>)
+              (<a href='#' onclick={() => app.run('delete-item', todo.idx)}>&#9249;</a>)
               </span>
           </li>)
       }
     </ul>
     <div>
-      <a href='#' onclick={e => app.run('filter-item', e)}>All</a> {` (${n1}) | `}
-      <a href='#' onclick={e => app.run('filter-item', e)}>Active</a> {`(${n2}) | `}
-      <a href='#' onclick={e => app.run('filter-item', e)}>Complete</a> {`(${n3})`}
+      <a href='#' onclick={e => app.run('filter-item', e)}>All</a> {` (${countAll}) | `}
+      <a href='#' onclick={e => app.run('filter-item', e)}>Active</a> {`(${countActive}) | `}
+      <a href='#' onclick={e => app.run('filter-item', e)}>Complete</a> {`(${countComplete})`}
     </div>
   </div>
 };
@@ -50,9 +51,9 @@ const view = (state: State) => {
 const update = {
   'new-state': (_, state) => state,
   'add-item': (state, title) => app.run('save-state', {
-     ...state,
-      list: [...state.list, { title, done: false }]
-    }),
+    ...state,
+    list: [...state.list, { title, done: false }]
+  }),
   'delete-item': (state, idx) => app.run('save-state', {
     ...state,
     list: [
@@ -70,7 +71,7 @@ const update = {
   }),
   'filter-item': (state, e) => ({ ...state, filter: e.target.textContent }),
   'keyup': (state, e) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && e.target.value) {
       app.run('add-item', e.target.value);
       e.target.value = '';
     }
