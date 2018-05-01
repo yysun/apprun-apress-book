@@ -32,7 +32,7 @@ const view = (state: State) => {
             (state.filter === 'Active' && !todo.done) ||
             (state.filter === 'Complete' && todo.done))
           .map((todo) => <li>
-            <input type='checkbox' onclick={() => app.run('toggle-item', todo.idx)} />
+            <input type='checkbox' onclick={() => app.run('toggle-item', todo.idx)} defaultChecked={todo.done} key={todo.title + todo.idx} />
             <span>{todo.title} {' '}
               (<a href='#' onclick={() => app.run('delete-item', todo.idx)}>&#9249;</a>)
               </span>
