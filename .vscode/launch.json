@@ -8,9 +8,9 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Server",
-      "localRoot": "${workspaceFolder}/Chapter_08",
-      "program": "${workspaceFolder}/Chapter_08/server.ts",
-      "outFiles": ["${workspaceFolder}/Chapter_08/**/*.js"],
+      "program": "${workspaceFolder}/Chapter_08/universal/server.ts",
+      "outFiles": ["${workspaceFolder}/Chapter_08/universal/**/*.js"],
+      "cwd": "${workspaceFolder}/Chapter_08/universal",
     },
     {
       "type": "chrome",

@@ -9,34 +9,36 @@ app.use(express.static('public'));
 // set apprun as view engine
 app.engine('js', viewEngine());
 app.set('view engine', 'js');
-app.set('views', __dirname);
+app.set('views', __dirname + '/components');
 
-// set global ssr flag
-app.use((req, res, next) => {
-  global['ssr'] = req.headers.accept.indexOf('application/json') < 0;
-  next();
-});
-
-import layout from './components/main';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+new Home().mount();
+new About().mount();
+new Contact().mount();
 
 const route = async (req) => new Promise((resolve, reject) => {
+  console.log(apprun)
+  const path = `${req.path}/${Date.now()}`;
   apprun.on('debug', p => {
-    if (p.vdom) resolve(p.vdom);
+    if (p.vdom && p.state.path === path.substring(2)) resolve(p.vdom);
   });
-  setTimeout(() => { reject('Timeout') }, 30000);
+  setTimeout(() => { reject('Timeout') }, 10000);
   try {
-    apprun.run('route', req.path);
+    apprun.run('route', path);
   } catch (ex) {
     reject(ex.message);
   }
 });
 
 app.get('*', async (req, res) => {
+  const ssr = req.headers.accept.indexOf('application/json') < 0;
   try {
     const vdom = await route(req);
-    res.render('index', { layout, vdom });
+    res.render('layout', { ssr, vdom });
   } catch (ex) {
-    res.render('index', { layout, vdom: ex });
+    res.render('layout', { ssr, vdom: ex.message || ex });
   }
 });
 

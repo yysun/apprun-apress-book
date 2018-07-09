@@ -4,15 +4,15 @@ const apprun_1 = require("apprun");
 class default_1 extends apprun_1.Component {
     constructor() {
         super(...arguments);
-        this.state = 'Home';
+        this.state = { name: 'Home' };
         this.view = (state) => {
             return apprun_1.default.createElement("div", null,
-                state,
+                state.name,
                 " - ",
                 new Date().toLocaleTimeString());
         };
         this.update = {
-            '/, /home': state => state,
+            '/, /home': (state, path) => (Object.assign({}, state, { path }))
         };
     }
 }
