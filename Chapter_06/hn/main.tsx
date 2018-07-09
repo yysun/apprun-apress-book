@@ -90,7 +90,7 @@ const List = ({ list }) => {
     </ul>
     <div className='more'>
       <span>{list.min + 1} - {list.max} ({list.items.length}) &nbsp;</span>
-      {list.items && list.max < list.items.length && <a href={`#/${list.type}/${list.max}`}> |&nbsp; More ...</a>}
+      {list.items && list.max < list.items.length && <a href={`#/${list.type}/${list.max + page_size}`}> |&nbsp; More ...</a>}
     </div>
   </div>;
 }
@@ -142,7 +142,7 @@ const update = {
       if (!state[type]) state[type] = { type, min: 0, max: page_size, items: [] };
       else {
         const max = parseInt(id) || 0;
-        state[type].max = Math.min(max + page_size, state[type].items.length);
+        state[type].max = Math.min(max, state[type].items.length);
       }
       getList(state);
     }
