@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>AppRun • Type Ahead</title>
+		<style>
+			body {
+				font-family: Lato;
+			}
+			.typeahead ul, .typeahead li {
+				list-style-type: none;
+				list-style-position:inside;
+				margin: 0;
+				padding: 0;
+			}
+
+			.typeahead li {
+				padding: 4px;
+			}
+
+			.typeahead li:hover {
+				background-color: #eeeeee;
+			}
+
+			.typeahead li.selected {
+				background-color: #ffffee;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="typeahead" id="my-app"></div>
+		<script src="app.js"></script>
+	</body>
+</html>

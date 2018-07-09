@@ -1,0 +1,94 @@
+{
+  "name": "apprun-apress-book",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack -p --mode production",
+    "test": "jest --watch",
+    "hello-world": "npm run start -- app=\"./Chapter_02/main.tsx\"",
+    "jsx-counter": "npm run start -- app=\"./Chapter_03/3-1.tsx\"",
+    "jsx-counter-history": "npm run start -- app=\"./Chapter_03/3-2.tsx\"",
+    "counters": "npm run start -- app=\"./Chapter_03/3-3.tsx\"",
+    "to-do": "npm run start -- app=\"./Chapter_03/3-7.tsx\"",
+    "to-do-local": "npm run start -- app=\"./Chapter_03/3-9.tsx\"",
+    "to-do-cloud": "npm run start -- app=\"./Chapter_03/3-10.tsx\"",
+    "to-do-mvc": "npm run start -- app=\"./Chapter_04/to-do/main.tsx\" --content-base=\"./Chapter_04/to-do\"",
+    "to-do-mvc-2": "npm run start -- app=\"./Chapter_04/to-do-2/main.tsx\" --content-base=\"./Chapter_04/to-do-2\"",
+    "counter-web-component": "npm run start -- app=\"./Chapter_04/counter-web-component/main.tsx\" --content-base=\"./Chapter_04/counter-web-component\"",
+    "clock": "npm run start -- app=\"./Chapter_05/5-3.tsx\"",
+    "clock-component": "npm run start -- app=\"./Chapter_05/5-4.tsx\"",
+    "hello": "npm run start -- app=\"./Chapter_05/5-5.tsx\"",
+    "hello-form": "npm run start -- app=\"./Chapter_05/5-6.tsx\"",
+    "echo": "npm run start -- app=\"./Chapter_05/5-8.tsx\"",
+    "typeahead": "npm run start -- app=\"./Chapter_05/typeahead/main.tsx\" --content-base=\"./Chapter_05/typeahead\"",
+    "fab": "npm run start -- app=\"./Chapter_05/fab/main.tsx\" --content-base=\"./Chapter_05/fab\"",
+    "echo-hash": "npm run start -- app=\"./Chapter_05/5-13.tsx\"",
+    "worker": "npm run start -- app=\"./Chapter_05/worker/main.tsx\" --content-base=\"./Chapter_05/worker\"",
+    "delay": "npm run start -- app=\"./Chapter_06/6-2.tsx\"",
+    "weather": "npm run start -- app=\"./Chapter_06/weather/main.tsx\" --content-base=\"./Chapter_06/weather\"",
+    "hn": "npm run start -- app=\"./Chapter_06/hn/main.tsx\" --content-base=\"./Chapter_06/hn/\"",
+    "spa": "npm run start -- app=\"./Chapter_07/main.tsx\" --content-base=\"./Chapter_07\"",
+    "spa-no-hash": "npm run start -- app=\"./Chapter_07/non-hash/main.tsx\" --content-base=\"./Chapter_07\"",
+    "spa-dynamic-import": "npm run start -- app=\"./Chapter_07/main-import.tsx\" --content-base=\"./Chapter_07\"",
+    "ch7:dev:server": "cd \"./Chapter_07/es-module\" && http-server",
+    "ch7:dev:ts": "tsc -w -p ./Chapter_07/es-module",
+    "spa-es-module": "run-p ch7:dev:ts ch7:dev:server",
+    "ch8:dev:server": "cd ./Chapter_08/universal && nodemon server",
+    "ch8:dev:ts": "tsc -w -p ./Chapter_08/universal",
+    "ssr": "run-p ch8:dev:ts ch8:dev:server",
+    "admin": "npm run start -- app=\"./Chapter_09/main.tsx\" --content-base=\"./Chapter_09\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yysun/apprun-apress-book.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yysun/apprun-apress-book/issues"
+  },
+  "homepage": "https://github.com/yysun/apprun-apress-book#readme",
+  "devDependencies": {
+    "@types/jest": "^23.1.4",
+    "@types/node": "^10.5.1",
+    "http-server": "^0.11.1",
+    "jest": "^23.3.0",
+    "nodemon": "^1.17.5",
+    "npm-run-all": "^4.1.3",
+    "source-map-loader": "^0.2.3",
+    "ts-jest": "^22.4.6",
+    "ts-loader": "^4.4.2",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2",
+    "webpack": "^4.14.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "apprun": "^2.0.7",
+    "express": "^4.16.3",
+    "firebase": "^5.2.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "globals": {
+      "ts-jest": {
+        "enableTsDiagnostics": true
+      }
+    }
+  }
+}

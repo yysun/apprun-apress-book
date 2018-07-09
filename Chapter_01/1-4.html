@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AppRun Counter with History</title>
+</head>
+<body>
+  <div id="my-app"></div>
+  <script src="https://unpkg.com/apprun@latest/dist/apprun-html.js"></script>
+  <script>
+    const state = 0;
+    const view = state => {
+      console.log(state);
+      return `<div>
+        <button onclick='app.run("history-prev")'> << </button>
+        <button onclick='app.run("history-next")'> >> </button>
+        <h1>${state}</h1>
+        <button onclick='app.run("-1")'>-1</button>
+        <button onclick='app.run("+1")'>+1</button>
+      </div>`;
+    };
+    const update = {
+      '+1': state => state + 1,
+      '-1': state => state - 1
+    };
+    app.start('my-app', state, view, update, {history: true});
+  </script>
+</body>
+</html>

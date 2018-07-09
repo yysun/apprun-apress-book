@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "reactNamespace": "app",
+    "lib": ["dom", "es2015", "es5"],
+    "experimentalDecorators": true,
+    "sourceMap": true
+  },
+  "include": [
+    "server.ts",
+    "views"
+  ],
+}
