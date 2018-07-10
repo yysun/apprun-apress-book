@@ -12,7 +12,9 @@ class default_1 extends apprun_1.Component {
                 new Date().toLocaleTimeString());
         };
         this.update = {
-            '/about': state => state,
+            '/about': state => {
+                throw new Error('test');
+            }
         };
     }
 }

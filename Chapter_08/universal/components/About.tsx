@@ -10,6 +10,8 @@ export default class extends Component {
   }
 
   update = {
-    '/about': state => state,
+    '/about': state => {
+      throw new Error('test')
+    }
   }
 }

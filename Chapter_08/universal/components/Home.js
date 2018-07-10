@@ -12,7 +12,8 @@ class default_1 extends apprun_1.Component {
                 new Date().toLocaleTimeString());
         };
         this.update = {
-            '/, /home': (state, path) => (Object.assign({}, state, { path }))
+            '/': (state) => (Object.assign({}, state, { path: '/' })),
+            '/home': (state, path) => (Object.assign({}, state, { path: '/home' }))
         };
     }
 }

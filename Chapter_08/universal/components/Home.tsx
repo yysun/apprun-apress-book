@@ -10,7 +10,8 @@ export default class extends Component {
   }
 
   update = {
-    '/, /home': (state, path) => ({ ...state, path })
+    '/': (state) => ({ ...state, path:'/' }),
+    '/home': (state, path) => ({ ...state, path:'/home' })
   }
 }
 

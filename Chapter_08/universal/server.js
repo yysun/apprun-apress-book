@@ -25,19 +25,20 @@ new About_1.default().mount();
 new Contact_1.default().mount();
 const route = (req) => __awaiter(this, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
-        console.log(apprun_1.default);
-        const path = `${req.path}/${Date.now()}`;
-        apprun_1.default.on('debug', p => {
-            if (p.vdom && p.state.path === path.substring(2))
+        setTimeout(() => reject('Cannot route: ' + req.path), 200);
+        const waitForVdom = p => {
+            if (p.vdom && p.state.path === req.path) {
                 resolve(p.vdom);
-        });
-        setTimeout(() => { reject('Timeout'); }, 10000);
+            }
+        };
+        apprun_1.default.on('debug', waitForVdom);
         try {
-            apprun_1.default.run('route', path);
+            apprun_1.default.run('route', req.path);
         }
         catch (ex) {
-            reject(ex.message);
+            reject(ex.toString());
         }
+        apprun_1.default.off('debug', waitForVdom);
     });
 });
 app.get('*', (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -46,8 +47,8 @@ app.get('*', (req, res) => __awaiter(this, void 0, void 0, function* () {
         const vdom = yield route(req);
         res.render('layout', { ssr, vdom });
     }
-    catch (ex) {
-        res.render('layout', { ssr, vdom: ex.message || ex });
+    catch (error) {
+        res.render('layout', { ssr, vdom: { error } });
     }
 }));
 const listener = app.listen(process.env.PORT || 3000, function () {

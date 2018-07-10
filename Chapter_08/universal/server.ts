@@ -19,17 +19,19 @@ new About().mount();
 new Contact().mount();
 
 const route = async (req) => new Promise((resolve, reject) => {
-  console.log(apprun)
-  const path = `${req.path}/${Date.now()}`;
-  apprun.on('debug', p => {
-    if (p.vdom && p.state.path === path.substring(2)) resolve(p.vdom);
-  });
-  setTimeout(() => { reject('Timeout') }, 10000);
+  setTimeout(() => reject('Cannot route: ' + req.path), 200);
+  const waitForVdom = p => {
+    if (p.vdom && p.state.path === req.path) {
+      resolve(p.vdom);
+    }
+  };
+  apprun.on('debug', waitForVdom);
   try {
-    apprun.run('route', path);
+    apprun.run('route', req.path);
   } catch (ex) {
-    reject(ex.message);
+    reject(ex.toString());
   }
+  apprun.off('debug', waitForVdom);
 });
 
 app.get('*', async (req, res) => {
@@ -37,8 +39,8 @@ app.get('*', async (req, res) => {
   try {
     const vdom = await route(req);
     res.render('layout', { ssr, vdom });
-  } catch (ex) {
-    res.render('layout', { ssr, vdom: ex.message || ex });
+  } catch (error) {
+    res.render('layout', { ssr, vdom: { error } });
   }
 });
 
