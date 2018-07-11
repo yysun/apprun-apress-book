@@ -4,16 +4,16 @@ const apprun_1 = require("apprun");
 class default_1 extends apprun_1.Component {
     constructor() {
         super(...arguments);
-        this.state = 'About';
+        this.state = '';
         this.view = (state) => {
             return apprun_1.default.createElement("div", null,
-                state,
-                " - ",
-                new Date().toLocaleTimeString());
+                "About  - ",
+                state);
         };
         this.update = {
-            '/about': state => {
+            '/about': _ => {
                 throw new Error('test');
+                // return new Date().toLocaleTimeString()
             }
         };
     }

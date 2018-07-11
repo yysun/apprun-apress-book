@@ -1,6 +1,5 @@
 import apprun from 'apprun';
 import * as viewEngine from 'apprun/viewEngine';
-
 import * as express from 'express';
 const app = express();
 
@@ -11,37 +10,25 @@ app.engine('js', viewEngine());
 app.set('view engine', 'js');
 app.set('views', __dirname + '/components');
 
-import Home from './components/Home';
-import About from './components/About';
-import Contact from './components/Contact';
-new Home().mount();
-new About().mount();
-new Contact().mount();
-
-const route = async (req) => new Promise((resolve, reject) => {
-  setTimeout(() => reject('Cannot route: ' + req.path), 200);
-  const waitForVdom = p => {
-    if (p.vdom && p.state.path === req.path) {
-      resolve(p.vdom);
-    }
-  };
-  apprun.on('debug', waitForVdom);
-  try {
-    apprun.run('route', req.path);
-  } catch (ex) {
-    reject(ex.toString());
-  }
-  apprun.off('debug', waitForVdom);
-});
-
-app.get('*', async (req, res) => {
+const route = async (component, req, res) => {
+  const getVdom = () => new Promise(resolve => {
+    const path = req.path === '/' ? '/home' : req.path;
+    apprun.run('route', path);
+    component.run('#', path, html => resolve(html));
+  });
   const ssr = req.headers.accept.indexOf('application/json') < 0;
   try {
-    const vdom = await route(req);
+    const vdom = await getVdom();
     res.render('layout', { ssr, vdom });
-  } catch (error) {
-    res.render('layout', { ssr, vdom: { error } });
+  } catch (ex) {
+    console.log(ex);
+    res.render('layout', { ssr, vdom: { Error: ex.message || ex } });
   }
+}
+
+import main from './components/main';
+app.get(/^\/(home|about|contact)?$/, async (req, res) => {
+  route(main, req, res);
 });
 
 const listener = app.listen(process.env.PORT || 3000, function () {

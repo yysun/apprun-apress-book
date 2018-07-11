@@ -1,17 +1,16 @@
 import app, {Component} from 'apprun';
 
 export default class extends Component {
-  state = { name: 'Home' }
+  state = ''
 
   view = (state) => {
     return <div>
-      {state.name} - {new Date().toLocaleTimeString()}
+      Home - {state}
     </div>
   }
 
   update = {
-    '/': (state) => ({ ...state, path:'/' }),
-    '/home': (state, path) => ({ ...state, path:'/home' })
+    '/home': _ => new Date().toLocaleTimeString()
   }
 }
 

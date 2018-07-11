@@ -1,16 +1,16 @@
 import app, {Component} from 'apprun';
 
 export default class extends Component {
-  state = 'Contact';
+  state = '';
 
   view = (state) => {
     return <div>
-      {state} - {new Date().toLocaleTimeString()}
+      Contact - {state}
     </div>
   }
 
   update = {
-    '/contact': state => state,
+    '/contact': _ => new Date().toLocaleTimeString()
   }
 }
 

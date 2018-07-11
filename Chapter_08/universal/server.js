@@ -17,39 +17,25 @@ app.use(express.static('public'));
 app.engine('js', viewEngine());
 app.set('view engine', 'js');
 app.set('views', __dirname + '/components');
-const Home_1 = require("./components/Home");
-const About_1 = require("./components/About");
-const Contact_1 = require("./components/Contact");
-new Home_1.default().mount();
-new About_1.default().mount();
-new Contact_1.default().mount();
-const route = (req) => __awaiter(this, void 0, void 0, function* () {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => reject('Cannot route: ' + req.path), 200);
-        const waitForVdom = p => {
-            if (p.vdom && p.state.path === req.path) {
-                resolve(p.vdom);
-            }
-        };
-        apprun_1.default.on('debug', waitForVdom);
-        try {
-            apprun_1.default.run('route', req.path);
-        }
-        catch (ex) {
-            reject(ex.toString());
-        }
-        apprun_1.default.off('debug', waitForVdom);
+const route = (component, req, res) => __awaiter(this, void 0, void 0, function* () {
+    const getVdom = () => new Promise(resolve => {
+        const path = req.path === '/' ? '/home' : req.path;
+        apprun_1.default.run('route', path);
+        component.run('#', path, html => resolve(html));
     });
-});
-app.get('*', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const ssr = req.headers.accept.indexOf('application/json') < 0;
     try {
-        const vdom = yield route(req);
+        const vdom = yield getVdom();
         res.render('layout', { ssr, vdom });
     }
-    catch (error) {
-        res.render('layout', { ssr, vdom: { error } });
+    catch (ex) {
+        console.log(ex);
+        res.render('layout', { ssr, vdom: { Error: ex.message || ex } });
     }
+});
+const main_1 = require("./components/main");
+app.get(/^\/(home|about|contact)?$/, (req, res) => __awaiter(this, void 0, void 0, function* () {
+    route(main_1.default, req, res);
 }));
 const listener = app.listen(process.env.PORT || 3000, function () {
     console.log('Your app is listening on port ' + listener.address().port);

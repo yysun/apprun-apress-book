@@ -4,15 +4,14 @@ const apprun_1 = require("apprun");
 class default_1 extends apprun_1.Component {
     constructor() {
         super(...arguments);
-        this.state = 'Contact';
+        this.state = '';
         this.view = (state) => {
             return apprun_1.default.createElement("div", null,
-                state,
-                " - ",
-                new Date().toLocaleTimeString());
+                "Contact - ",
+                state);
         };
         this.update = {
-            '/contact': state => state,
+            '/contact': _ => new Date().toLocaleTimeString()
         };
     }
 }

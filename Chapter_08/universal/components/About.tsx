@@ -1,17 +1,18 @@
 import app, {Component} from 'apprun';
 
 export default class extends Component {
-  state = 'About';
+  state = '';
 
   view = (state) => {
     return <div>
-      {state} - {new Date().toLocaleTimeString()}
+      About  - {state}
     </div>
   }
 
   update = {
-    '/about': state => {
-      throw new Error('test')
+    '/about': _ => {
+      throw new Error('test');
+      // return new Date().toLocaleTimeString()
     }
   }
 }
