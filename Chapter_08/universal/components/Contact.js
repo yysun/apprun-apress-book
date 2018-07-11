@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const apprun_1 = require("apprun");
-class default_1 extends apprun_1.Component {
+class Contact extends apprun_1.Component {
     constructor() {
         super(...arguments);
         this.state = '';
@@ -15,5 +15,6 @@ class default_1 extends apprun_1.Component {
         };
     }
 }
-exports.default = default_1;
+exports.Contact = Contact;
+exports.default = new Contact().mount();
 //# sourceMappingURL=Contact.js.map
