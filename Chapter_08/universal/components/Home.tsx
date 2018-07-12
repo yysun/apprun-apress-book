@@ -1,18 +1,13 @@
 import app, {Component} from 'apprun';
 
-export class Home extends Component {
+export default class extends Component {
   state = ''
 
-  view = (state) => {
-    const html = <div>
-      Home - {state}
-    </div>;
-    return state.cb ? state.cb(html) : html;
-  }
+  view = (state) => <div>
+    Home - {state}
+  </div>;
 
   update = {
-    '/home': (_, cb) => ({ time: new Date().toLocaleTimeString(), cb })
+    'home': _ => new Date().toLocaleTimeString()
   }
 }
-
-export default new Home().mount();

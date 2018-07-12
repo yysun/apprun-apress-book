@@ -9,16 +9,22 @@ app.engine('js', viewEngine());
 app.set('view engine', 'js');
 app.set('views', __dirname + '/components');
 
-const route = async (component, req, res) => {
-  const getVdom = () => new Promise((resolve, reject) => {
-    let vdom = false;
-    const path = req.path === '/' ? '/home' : req.path;
-    setTimeout(() => !vdom && reject(new Error('Cannot route:' + [path])), 300);
-    component.run(path, html => resolve(vdom = html));
-  });
+const route = async (Component, req, res) => {
   const ssr = req.headers.accept.indexOf('application/json') < 0;
+  const getState = (component) => new Promise((resolve, reject) => {
+    const state = component.state;
+    if (state instanceof Promise)
+      state.then(s => resolve(s))
+        .catch(r => reject(r));
+    else
+      resolve(state);
+  });
   try {
-    const vdom = await getVdom();
+    const component = new Component().mount();
+    const event = (req.path === '/' ? '/home' : req.path).substring(1);
+    component.run(event);
+    const state = await getState(component);
+    const vdom = component.view(state);
     res.render('layout', { ssr, vdom });
   } catch (ex) {
     console.log(ex);
@@ -26,21 +32,20 @@ const route = async (component, req, res) => {
   }
 }
 
-import home from './components/Home';
-import about from './components/About';
-import contact from './components/Contact';
-import { rejects } from 'assert';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
 
 app.get(/^\/(home)?$/, async (req, res) => {
-  route(home, req, res);
+  route(Home, req, res);
 });
 
 app.get('/about', async (req, res) => {
-  route(about, req, res);
+  route(About, req, res);
 });
 
 app.get('/contact', async (req, res) => {
-  route(contact, req, res);
+  route(Contact, req, res);
 });
 
 const listener = app.listen(process.env.PORT || 3000, function () {

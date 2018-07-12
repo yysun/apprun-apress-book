@@ -16,16 +16,22 @@ app.use(express.static('public'));
 app.engine('js', viewEngine());
 app.set('view engine', 'js');
 app.set('views', __dirname + '/components');
-const route = (component, req, res) => __awaiter(this, void 0, void 0, function* () {
-    const getVdom = () => new Promise((resolve, reject) => {
-        let vdom = false;
-        const path = req.path === '/' ? '/home' : req.path;
-        setTimeout(() => !vdom && reject(new Error('Cannot route:' + [path])), 300);
-        component.run(path, html => resolve(vdom = html));
-    });
+const route = (Component, req, res) => __awaiter(this, void 0, void 0, function* () {
     const ssr = req.headers.accept.indexOf('application/json') < 0;
+    const getState = (component) => new Promise((resolve, reject) => {
+        const state = component.state;
+        if (state instanceof Promise)
+            state.then(s => resolve(s))
+                .catch(r => reject(r));
+        else
+            resolve(state);
+    });
     try {
-        const vdom = yield getVdom();
+        const component = new Component().mount();
+        const event = (req.path === '/' ? '/home' : req.path).substring(1);
+        component.run(event);
+        const state = yield getState(component);
+        const vdom = component.view(state);
         res.render('layout', { ssr, vdom });
     }
     catch (ex) {

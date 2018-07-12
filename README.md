@@ -59,6 +59,7 @@ Double click the .html files to run the examples.
 ## Chapter 8 - Server-Side Rendering
 
 * npm run ssr
+* https://github.com/yysun/apprun-ssr
 * https://github.com/yysun/apprun-ssr-aspnet
 * https://github.com/yysun/apprun-ssr-express
 * https://github.com/yysun/apprun-ssr-laravel

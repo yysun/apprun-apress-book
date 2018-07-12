@@ -1,21 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const apprun_1 = require("apprun");
-class Home extends apprun_1.Component {
+class default_1 extends apprun_1.Component {
     constructor() {
         super(...arguments);
         this.state = '';
-        this.view = (state) => {
-            const html = apprun_1.default.createElement("div", null,
-                "Home - ",
-                state);
-            return state.cb ? state.cb(html) : html;
-        };
+        this.view = (state) => apprun_1.default.createElement("div", null,
+            "Home - ",
+            state);
         this.update = {
-            '/home': (_, cb) => ({ time: new Date().toLocaleTimeString(), cb })
+            'home': _ => new Date().toLocaleTimeString()
         };
     }
 }
-exports.Home = Home;
-exports.default = new Home().mount();
+exports.default = default_1;
 //# sourceMappingURL=Home.js.map
