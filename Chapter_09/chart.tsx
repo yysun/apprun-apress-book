@@ -1,4 +1,5 @@
 import app, { Component } from 'apprun';
+import { Card } from './ui';
 
 declare var Chart;
 declare var moment;
@@ -95,7 +96,9 @@ export default class extends Component {
     }
   };
 
-  view = state => <canvas id="canvas"></canvas>;
+  view = _ => <Card header="Chart JS">
+    <canvas id="canvas"></canvas>
+  </Card>;
 
   update = {};
 

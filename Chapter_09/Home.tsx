@@ -2,10 +2,35 @@ import app, { Component } from 'apprun';
 import { Row, Column, Card, Alert, Sidebar } from './ui';
 import DataTable from './table';
 import Chart from './chart';
-import Calender from './calendar';
-import './map';
+import Calendar from './calendar';
+import Map from './map';
 
-const Alerts = () => <Row>
+const Dashboard = (_, children) => <div className="row h-100">
+  {children}
+</div>
+
+const Widgets = () => <main className="col">
+  <CardList />
+  <Alerts />
+  <Row>
+    <Column><Chart id="chart"/></Column>
+    <Column><Map id="map"/></Column>
+  </Row>
+  <Row className="my-4" />
+  <DataTable />
+  <Row className="my-4" />
+  <Row className="my-4">
+    <Column className="col-md-6"><Calendar id="c1" name="My Calendar" /></Column>
+    <Column className="col-md-6"><Calendar id="c2" name="Team Calendar" /></Column>
+  </Row>
+  <Row className="my-4" />
+  <Row className="my-4" />
+  <Row className="my-4" />
+  <Row className="my-4" />
+  <Row className="my-4" />
+</main>
+
+const Alerts = () => <Row className="my-4">
   <Column>
     <Alert className="alert-primary">Primary</Alert>
   </Column>
@@ -27,18 +52,20 @@ const Alerts = () => <Row>
 </Row>
 
 
-const CardList = () => [1, 2, 3, 4, 5, 6].map(i => <div className="col-sm-4 col-lg-2">
-  <Card>
-    <div className="card-body text-center">
-      <div className="text-right text-green">
-        {(Math.random() * 10).toFixed(1)} %
+const CardList = () => <Row className="my-4">
+  {[1, 2, 3, 4, 5, 6].map(i => <div className="col-sm-4 col-lg-2">
+    <Card>
+      <div className="card-body text-center">
+        <div className="text-right text-green">
+          {(Math.random() * 10).toFixed(1)} %
       </div>
-      <div className="h1 m-0">{(Math.random() * 100).toFixed(0)}</div>
-      <div className="text-muted">KPI #{i}</div>
-    </div>
-  </Card>
-</div>
-)
+        <div className="h1 m-0">{(Math.random() * 100).toFixed(0)}</div>
+        <div className="text-muted">KPI #{i}</div>
+      </div>
+    </Card>
+  </div>)}
+</Row>;
+
 
 const menus = [
   { icon: 'home', text: 'Home', href: '#' },
@@ -48,44 +75,19 @@ const menus = [
   {
     icon: 'list', text: 'More', href: '#', menus:
       [
-        { icon: 'check', text: 'Link 1', href: '#' },
-        { icon: 'check', text: 'Link 2', href: '#' },
-        { icon: 'check', text: 'Link 3', href: '#' },
+        { icon: 'check', text: 'Admin', href: '#' },
       ]
   }
 ];
 
-export default class HomeComponent extends Component {
+export default class extends Component {
 
   state = 'Dashboard';
-  view = (state) => <Sidebar menus={menus}>
-    <Row>
-      <CardList />
-    </Row>
-    <Alerts />
-    <Row>
-      <Column className="col-lg-6">
-        <Card header="Chart">
-          <Chart />
-        </Card>
-      </Column>
-      <Column className="col-lg-6">
-        <Card header="D3 Map">
-          <div id="map"></div>
-        </Card>
-      </Column>
-    </Row>
-    <Row className="data-tables">
-      <Column>
-        <DataTable />
-      </Column>
-    </Row>
-    <Row>
-      <Column>
-        <Calender />
-      </Column>
-    </Row>
-  </Sidebar>
+
+  view = (state) => <Dashboard>
+    <Sidebar menus={menus} />
+    <Widgets></Widgets>
+  </Dashboard>
 
   update = {
     '#Home': state => state,
