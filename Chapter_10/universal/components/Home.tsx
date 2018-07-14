@@ -8,6 +8,6 @@ export default class extends Component {
   </div>;
 
   update = {
-    'home': _ => new Date().toLocaleTimeString()
+    '/home': _ => new Date().toLocaleTimeString()
   }
 }

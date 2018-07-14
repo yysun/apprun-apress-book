@@ -9,7 +9,7 @@ class default_1 extends apprun_1.Component {
             "Home - ",
             state);
         this.update = {
-            'home': _ => new Date().toLocaleTimeString()
+            '/home': _ => new Date().toLocaleTimeString()
         };
     }
 }

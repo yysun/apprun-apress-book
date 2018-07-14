@@ -11,9 +11,8 @@ class default_1 extends apprun_1.Component {
                 state);
         };
         this.update = {
-            'about': _ => {
+            '/about': _ => {
                 throw new Error('test');
-                // return new Date().toLocaleTimeString()
             }
         };
     }

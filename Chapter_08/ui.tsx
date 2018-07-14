@@ -1,3 +1,5 @@
+import app from 'apprun';
+
 const mergeClassName = (name, props) => {
   props = props || {};
   if (props.className) {

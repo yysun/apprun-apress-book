@@ -26,9 +26,10 @@ const route = (Component, req, res) => __awaiter(this, void 0, void 0, function*
         else
             resolve(state);
     });
+    const component = new Component();
     try {
-        const component = new Component().mount();
-        const event = (req.path === '/' ? '/home' : req.path).substring(1);
+        const event = (req.path === '/' ? '/home' : req.path);
+        component.mount();
         component.run(event);
         const state = yield getState(component);
         const vdom = component.view(state);
@@ -37,6 +38,9 @@ const route = (Component, req, res) => __awaiter(this, void 0, void 0, function*
     catch (ex) {
         console.log(ex);
         res.render('layout', { ssr, vdom: { Error: ex.message || ex } });
+    }
+    finally {
+        component.unmount();
     }
 });
 const Home_1 = require("./components/Home");

@@ -19,9 +19,10 @@ const route = async (Component, req, res) => {
     else
       resolve(state);
   });
+  const component = new Component();
   try {
-    const component = new Component().mount();
-    const event = (req.path === '/' ? '/home' : req.path).substring(1);
+    const event = (req.path === '/' ? '/home' : req.path);
+    component.mount();
     component.run(event);
     const state = await getState(component);
     const vdom = component.view(state);
@@ -29,6 +30,8 @@ const route = async (Component, req, res) => {
   } catch (ex) {
     console.log(ex);
     res.render('layout', { ssr, vdom: { Error: ex.message || ex } });
+  } finally {
+    component.unmount();
   }
 }
 

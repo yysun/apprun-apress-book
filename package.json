@@ -35,10 +35,10 @@
     "ch7:dev:server": "cd \"./Chapter_07/es-module\" && http-server",
     "ch7:dev:ts": "tsc -w -p ./Chapter_07/es-module",
     "spa-es-module": "run-p ch7:dev:ts ch7:dev:server",
-    "ch8:dev:server": "cd ./Chapter_08/universal && nodemon server",
-    "ch8:dev:ts": "tsc -w -p ./Chapter_08/universal",
-    "ssr": "run-p ch8:dev:ts ch8:dev:server",
-    "admin": "npm run start -- app=\"./Chapter_09/main.tsx\" --content-base=\"./Chapter_09\""
+    "admin": "npm run start -- app=\"./Chapter_08/main.tsx\" --content-base=\"./Chapter_08\"",
+    "ch10:dev:server": "cd ./Chapter_10/universal && nodemon server",
+    "ch10:dev:ts": "tsc -w -p ./Chapter_10/universal",
+    "ssr": "run-p ch10:dev:ts ch10:dev:server"
   },
   "repository": {
     "type": "git",
@@ -56,7 +56,7 @@
     "@types/node": "^10.5.2",
     "http-server": "^0.11.1",
     "jest": "^23.3.0",
-    "nodemon": "^1.17.5",
+    "nodemon": "^1.18.2",
     "npm-run-all": "^4.1.3",
     "source-map-loader": "^0.2.3",
     "ts-jest": "^22.4.6",
@@ -68,7 +68,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
-    "apprun": "^2.0.9",
+    "apprun": "^2.0.10",
     "express": "^4.16.3",
     "firebase": "^5.2.0"
   },

@@ -5,14 +5,13 @@ export default class extends Component {
 
   view = (state) => {
     return <div>
-      About  - {state}
+      Contact - {state}
     </div>
   }
 
   update = {
-    'about': _ => {
-      throw new Error('test');
-      // return new Date().toLocaleTimeString()
-    }
+    '/contact': async _ => new Promise(resolve =>
+      setTimeout(() => resolve(new Date().toLocaleTimeString() + ' - delayed'), 200))
   }
 }
+

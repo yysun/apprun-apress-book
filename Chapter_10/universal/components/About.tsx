@@ -5,12 +5,13 @@ export default class extends Component {
 
   view = (state) => {
     return <div>
-      Contact - {state}
+      About  - {state}
     </div>
   }
 
   update = {
-    '/contact': _ => new Date().toLocaleTimeString()
+    '/about': _ => {
+      throw new Error('test');
+    }
   }
 }
-
