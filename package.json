@@ -36,9 +36,9 @@
     "ch7:dev:ts": "tsc -w -p ./Chapter_07/es-module",
     "spa-es-module": "run-p ch7:dev:ts ch7:dev:server",
     "admin": "npm run start -- app=\"./Chapter_08/main.tsx\" --content-base=\"./Chapter_08\"",
-    "ch10:dev:server": "cd ./Chapter_10/universal && nodemon server",
-    "ch10:dev:ts": "tsc -w -p ./Chapter_10/universal",
-    "ssr": "run-p ch10:dev:ts ch10:dev:server"
+    "ch09:dev:server": "cd ./Chapter_09/universal && nodemon server",
+    "ch09:dev:ts": "tsc -w -p ./Chapter_09/universal",
+    "ssr": "run-p ch09:dev:ts ch09:dev:server"
   },
   "repository": {
     "type": "git",
