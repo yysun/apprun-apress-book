@@ -61,27 +61,32 @@ Double click the .html files to run the examples.
 * npm run admin
 * https://github.com/yysun/apprun-bootstrap
 
-## Chapter 9 - Real-World SPA
-
-* Live App: https://gothinkster.github.io/apprun-realworld-example-app
-* Source code: https://github.com/gothinkster/apprun-realworld-example-app
-
-## Chapter 10 - Server-Side Rendering
+## Chapter 9 - Server-Side Rendering
 
 * npm run ssr
 * https://github.com/yysun/apprun-ssr
 * https://github.com/yysun/apprun-ssr-aspnet
+* https://github.com/yysun/apprun-ssr-aspnet-core
 * https://github.com/yysun/apprun-ssr-express
 * https://github.com/yysun/apprun-ssr-laravel
-
-## Chapter 11 - Serverless Deployment
 
 * Live App: https://apprun-hn-ssr.firebaseapp.com
 * Source code: https://github.com/yysun/apprun-hn-ssr
 * Web page performance test link: https://www.webpagetest.org/result/180708_RZ_67089f5b9e99ec9ad8e8a42c66938a5d/
 
-## Chapter 12 - Progressive Web Applications
+## Chapter 10 - Real-World SPA
 
-* Live App: https://yysun.github.io/apprun-hn
-* Source code: https://github.com/yysun/apprun-hn
-* Web page performance test link: https://www.webpagetest.org/result/180707_CX_5bb577b86f463e94663b04305dabd710/
+* Live App: https://gothinkster.github.io/apprun-realworld-example-app
+* Source code: https://github.com/gothinkster/apprun-realworld-example-app
+
+
+## Chapter 11 - Unit Testing
+
+* Source code: https://github.com/gothinkster/apprun-realworld-example-app/tree/master/tests
+
+
+## Chapter 12 - AppRun DevTools
+
+* Live App: https://gothinkster.github.io/apprun-realworld-example-app
+* Source code: https://github.com/yysun/apprun/blob/master/src/apprun-dev-tools.tsx
+* Source code: https://github.com/yysun/apprun/blob/master/src/apprun-dev-tools-tests.tsx
