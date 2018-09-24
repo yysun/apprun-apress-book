@@ -19,7 +19,7 @@ class TypeAheadApp extends Component {
 
   view = (state) => <div>
     <h3>Hello {state}</h3>
-    <TypeAhead id="ta"
+    <TypeAhead
       onSearch={search}
       onSelect={text => this.run('input', text)}/>
   </div>;
@@ -29,4 +29,4 @@ class TypeAheadApp extends Component {
   }
 }
 
-app.render(document.getElementById('my-app'), <TypeAheadApp />);
+new TypeAheadApp().start('my-app');

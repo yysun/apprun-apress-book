@@ -4,17 +4,16 @@ class HelloComponent extends Component {
   state = 'World';
   view = state => <div>
     <h1>Hello {state}</h1>
-    <input onchange={e => this.run('input', e)} value={state} />
+    <input onchange={e => this.run('change', e)} value={state} />
   </div>;
 
   update = {
     '#': (state, hash) => hash || state,
-    'input': (_, e) => {
+    'change': (_, e) => {
       const text = e.target.value;
       history.pushState(null, text, '#/' + text);
-      return text;
     }
   };
 }
 
-app.render(document.getElementById('my-app'), <HelloComponent />);
+new HelloComponent().start('my-app');

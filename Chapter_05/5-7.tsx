@@ -1,6 +1,6 @@
 import app, { Component } from 'apprun';
 
-class EchoComponent extends Component {
+class DelayedEchoComponent extends Component {
 
   state = 'World';
 
@@ -10,8 +10,8 @@ class EchoComponent extends Component {
   </div>;
 
   update = {
-    'input': (state, e) => e.target.value
+    'input': [(state, e) => e.target.value, {delay: 1000}]
   }
 }
 
-new EchoComponent().start('my-app');
+new DelayedEchoComponent().start('my-app');

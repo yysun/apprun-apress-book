@@ -11,8 +11,8 @@ class HelloComponent extends Component {
   </div>;
 
   update = {
-    'input': (state) => document.getElementById('text')['value']
+    'input': _ => (document.getElementById('text') as HTMLInputElement).value
   }
 }
 
-app.render(document.getElementById('my-app'), <HelloComponent />);
+new HelloComponent().start('my-app');

@@ -14,4 +14,4 @@ class FabApp extends Component {
   }
 }
 
-app.render(document.getElementById('my-app'), <FabApp />);
+new FabApp().start('my-app');

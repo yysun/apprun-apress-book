@@ -24,5 +24,5 @@ class CounterComponent extends Component {
   }
 }
 
-app.render(document.getElementById('my-app'), <CounterComponent />);
+new CounterComponent().start('my-app');
 

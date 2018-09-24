@@ -22,15 +22,15 @@ export default class TypeAheadComponent extends Component {
   };
 
   update = {
-    search: async (state, e) => {
-      const options = await this.state.onSearch(e.target.value);
+    search: [(state, e) => {
+      const options = this.state.onSearch(e.target.value);
       return {
         ...state,
         show: true,
         selected: e.target.value,
         options
       };
-    },
+    }, { delay:200}],
     popup: (state, show) => (state.show === show ? null : { ...state, show }),
     keydown: (state, e) => {
       if (!state.options) return;
