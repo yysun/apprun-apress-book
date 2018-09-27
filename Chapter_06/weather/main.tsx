@@ -49,4 +49,4 @@ const update = {
   }
 };
 
-app.start('my-app', state, view,);
+app.start('my-app', state, view, update);
