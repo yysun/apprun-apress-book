@@ -66,7 +66,7 @@ export default class extends Component {
     ]
   };
 
-  view = (state) => <div style={{ 'font-size': '0.8em' }}>
+  view = (state) => <div>
     <h5>{state.name}</h5>
     <div id={`calendar-${state.id}`}></div>
   </div>;

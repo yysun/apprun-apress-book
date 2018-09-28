@@ -10,7 +10,7 @@ export default class extends Component {
   </Card>;
 
   update = {
-    '##map': (_, features) => features
+    'draw-map': (_, features) => features
   };
 
   rendered = (features) => {
@@ -50,11 +50,15 @@ export default class extends Component {
         d3.select("#map-text").text("D3 Map - Country Code:" + this.id);
       });
   }
+  mounted = () => {
+    const _this = this;
+    d3.json("./world-110m.json", function (error, topo) {
+      if (error) throw error;
+      const features = topojson.feature(topo, topo.objects.countries).features;
+      _this.run('draw-map', features);
+    });
+  }
 }
 
-d3.json("./world-110m.json", function (error, topo) {
-  if (error) throw error;
-  const features = topojson.feature(topo, topo.objects.countries).features;
-  app.run('##map', features);
-});
+
 
