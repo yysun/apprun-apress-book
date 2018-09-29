@@ -12,7 +12,7 @@ app.set('views', __dirname + '/components');
 const route = async (Component, req, res) => {
   const ssr = req.headers.accept.indexOf('application/json') < 0;
   const getState = (component) => new Promise((resolve, reject) => {
-    const state = component.state;
+    const state = component._state;
     if (state instanceof Promise)
       state.then(s => resolve(s))
         .catch(r => reject(r));

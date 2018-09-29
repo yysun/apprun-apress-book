@@ -20,7 +20,7 @@ namespace WebApplication2
 
         public VirtualDomAttribute()
         {
-            
+
         }
 
         public void OnResultExecuting(ResultExecutingContext filterContext)
@@ -40,9 +40,9 @@ namespace WebApplication2
             {
                 var doc = new HtmlDocument();
                 doc.LoadHtml(capturedText);
-                var root = doc.DocumentNode.SelectSingleNode("/div");
+                var root = doc.DocumentNode.SelectSingleNode("//div[@id='apprun-app']");
+                if (root == null) root = doc.DocumentNode.SelectSingleNode("/div");
                 vdom = RemoveWhiteSpace(Convert(root).GetValue("children").ToString(Formatting.None));
-                filterContext.HttpContext.Response.ContentType = "application/json; charset=utf-8";
             }
             filterContext.HttpContext.Response.Output = originalWriter;
             filterContext.HttpContext.Response.Write(vdom);
@@ -86,8 +86,8 @@ namespace WebApplication2
                 props.Add(name, attr.Value);
             });
             if(props.HasValues) vdom.Add("props", props);
-            return vdom;              
+            return vdom;
         }
     }
-    
+
 }
