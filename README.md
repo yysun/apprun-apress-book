@@ -15,6 +15,7 @@ Double click the .html files to run the examples.
 
 ## Chapter 2 - Development Environment
 
+* npm start
 * npm run hello-world
 
 ## Chapter 3 - Model the State
@@ -35,7 +36,6 @@ Double click the .html files to run the examples.
 ## Chapter 5 - Event Patterns
 
 * npm run clock
-* npm run clock-component
 * npm run hello
 * npm run hello-form
 * npm run echo
