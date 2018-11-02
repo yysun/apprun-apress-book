@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development -- app=\"./Chapter_02/main.tsx\"",
+    "start": "webpack-dev-server --mode development",
     "build": "webpack -p --mode production",
     "test": "jest --watch",
     "hello-world": "npm run start -- app=\"./Chapter_02/main.tsx\"",
