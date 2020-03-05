@@ -1,10 +1,27 @@
 # apprun-apress-book
 
-This project contains the source code of the book _Practical Application Development with AppRun_.
+## AppRun Book from Apress
 
-After cloned the project, please run
+[![Order from Amazon](https://camo.githubusercontent.com/99fad1f024c274a3d752a1583cf125037583811c/68747470733a2f2f696d616765732e737072696e6765722e636f6d2f7367772f626f6f6b732f6d656469756d2f393738313438343234303638372e6a7067)](https://www.amazon.com/Practical-Application-Development-AppRun-High-Performance/dp/1484240685/)
+
+* [Order from Amazon](https://www.amazon.com/Practical-Application-Development-AppRun-High-Performance/dp/1484240685/)
+
+
+This project contains the source code of the book _Practical Application Development with AppRun_.
+> [AppRun](https://github.com/yysun/apprun) was at 1.15 when book was published. Since then there are new features added to . Please refer the [CHANGELOG](https://github.com/yysun/apprun/blob/master/CHANGELOG.md) and [WHAT'S NEW](https://apprun.js.org/#new) of the project.
+
+
+## Use the Examples
+
+Clone the project:
+
+* git clone https://github.com/yysun/apprun-apress-book.git
+
+And then run:
 
 * npm install
+
+Now, you can run the examples as following.
 
 ## Chapter 1 - Getting Started
 
@@ -58,7 +75,7 @@ Double click the .html files to run the examples.
 ## Chapter 8 - Administrative Dashboard
 
 * npm run admin
-* https://github.com/yysun/apprun-bootstrap
+* https://github.com/apprunjs/apprun-bootstrap
 
 ## Chapter 9 - Server-Side Rendering
 
