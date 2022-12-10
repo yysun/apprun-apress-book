@@ -69,7 +69,7 @@
   },
   "dependencies": {
     "apprun": "^2.23.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "firebase": "^7.9.3"
   },
   "jest": {
